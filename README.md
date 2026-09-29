@@ -74,11 +74,6 @@ Add to your project's `.agents/skills.json`:
 │   └── skills/
 │       └── instagram-puzzle-design/
 │           └── SKILL.md          ← Main skill file
-├── Instagram Design/             ← Sample outputs and HTML previews
-│   ├── instagram_grid_3post_perfect/
-│   ├── instagram_grid_4x5/
-│   ├── instagram_grid_bright_future/
-│   └── instagram_grid_light_sample/
 └── README.md
 ```
 
