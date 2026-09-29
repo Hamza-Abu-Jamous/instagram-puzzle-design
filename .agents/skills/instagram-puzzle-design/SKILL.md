@@ -1,5 +1,5 @@
 ---
-name: instagram-puzzle-grid
+name: instagram-puzzle-design
 description: >-
   Use this skill when the user asks to design, generate, or slice an Instagram
   Puzzle Grid (seamless grid / بازل إنستغرام). Covers the correct canvas
@@ -9,7 +9,7 @@ description: >-
   Programmers IT brand system (colors + fonts).
 ---
 
-# Instagram Puzzle Grid — Engineering Skill
+# Instagram Puzzle Design — Engineering Skill
 ### Programmers IT · Devoteam Formula
 
 > [!IMPORTANT]

@@ -7,7 +7,7 @@
 
 ## 📦 Available Skills
 
-### [`instagram-puzzle-grid`](.agents/skills/instagram-puzzle-grid/SKILL.md)
+### [`instagram-puzzle-design`](.agents/skills/instagram-puzzle-design/SKILL.md)
 
 **Design pixel-perfect seamless Instagram Puzzle Grids (بازل إنستغرام).**
 
@@ -58,7 +58,7 @@ Add to your project's `.agents/skills.json`:
 {
   "skills": [
     {
-      "path": "https://raw.githubusercontent.com/YOUR_USERNAME/programmers-it-skills/main/.agents/skills/instagram-puzzle-grid/SKILL.md"
+      "path": "https://raw.githubusercontent.com/YOUR_USERNAME/instagram-puzzle-design/main/.agents/skills/instagram-puzzle-design/SKILL.md"
     }
   ]
 }
@@ -72,7 +72,7 @@ Add to your project's `.agents/skills.json`:
 .
 ├── .agents/
 │   └── skills/
-│       └── instagram-puzzle-grid/
+│       └── instagram-puzzle-design/
 │           └── SKILL.md          ← Main skill file
 ├── Instagram Design/             ← Sample outputs and HTML previews
 │   ├── instagram_grid_3post_perfect/
