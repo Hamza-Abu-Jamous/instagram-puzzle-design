@@ -1,68 +1,65 @@
-# 🧩 Programmers IT — Antigravity Skills & Customizations
+# 🧩 Instagram Puzzle Design — Universal AI Agent Skill
 
-> A collection of production-tested **Antigravity (AGY) skills** built by the [Programmers IT](https://programmersit.com) team.
-> Drop the `.agents/` folder into any project to instantly teach your AI assistant our battle-tested workflows.
+> Production-tested AI skill and mathematical engineering guide for designing seamless **Instagram Puzzle Grids** (بازل إنستغرام).
+> Built to work out-of-the-box with **any AI agent or coding assistant**: Cursor, Claude (Code / Projects), ChatGPT, GitHub Copilot, Windsurf, Antigravity, and any LLM.
 
 ---
 
-## 📦 Available Skills
+## 🎯 What Problem Does This Solve?
 
-### [`instagram-puzzle-design`](.agents/skills/instagram-puzzle-design/SKILL.md)
+Creating seamless Instagram puzzle grids with AI often leads to three critical flaws:
+1. **Broken Lines at Slice Borders:** Diagonal lines shift vertically across post gaps due to sub-pixel rounding.
+2. **Profile Cropping Destruction:** Instagram crops 4:5 portrait posts into 1:1 squares on profile pages, cutting off headlines and logos.
+3. **Mirrored Order:** Publishing in normal chronological order flips the puzzle horizontally.
 
-**Design pixel-perfect seamless Instagram Puzzle Grids (بازل إنستغرام).**
+This skill equips your AI assistant with the **exact mathematical rules, crop coordinates, SVG paths, and safe zones** to generate zero-flaw puzzle designs every single time.
 
-Covers everything derived from real production work:
+---
 
-| Topic | What's Inside |
+## 📦 What's Inside the Skill?
+
+See full details in [`SKILL.md`](.agents/skills/instagram-puzzle-design/SKILL.md):
+
+| Rule / Section | Description |
 | :--- | :--- |
-| 📐 Master Canvas | Exact pixel dimensions for 3, 6, and 9-post grids |
-| 🛡️ Horizontal Tangent Rule | How to prevent line-break artifacts at slice borders |
-| 🔲 Safe Zones | 1:1 profile crop areas — where to place text & logos |
-| 📅 Publishing Order | Right → Center → Left (bottom row first for multi-row) |
-| ✂️ Slicing Coordinates | Pixel-exact crop coordinates for every post |
-| 🔷 SVG Bezier Path | Mathematically correct laser ribbon across all 3 posts |
-| 🤖 AI Prompts | Midjourney v6 / SD / Gemini prompts for backgrounds |
-| 🎨 Brand System | Programmers IT colors (emerald + cyan) & fonts (Cairo + Plus Jakarta Sans) |
+| 📐 **Master Canvas Dimensions** | Exact pixel dimensions for 3-post (`3240×1350`), 6-post (`3240×2700`), and 9-post (`3240×4050`) grids |
+| 🛡️ **Zero-Slope Tangent Rule** | Mathematical rule (`dy/dx = 0`) at slice cuts (`x=1080`, `x=2160`) preventing line breaks |
+| 🔲 **1:1 vs 4:5 Safe Zones** | Exact coordinates for the 1080×1080 px safe square (buffers: `y=0–135` & `y=1215–1350`) |
+| 📅 **Publishing Sequence** | Reverse chronological publication order (Right → Center → Left) |
+| ✂️ **Slice Coordinates** | Pixel-exact crop matrix for image generation and slicing scripts |
+| 🔷 **SVG Bezier Laser Path** | Ready-to-use vector laser path with soft glow filter |
+| 🤖 **AI Image Prompts** | Tuned prompts for Midjourney v6, Stable Diffusion, and Gemini Imagen |
+| 🎨 **Brand Design System** | Modern tech color tokens and typography hierarchy |
 
 ---
 
-## 🚀 How to Use
+## 🚀 How to Use With Any AI Agent
 
-### Option A — Use in your project (recommended)
+This skill is pure Markdown with standard YAML frontmatter. You can use it across any platform:
 
-Copy the `.agents/` folder into the root of your project:
+### 1. Cursor
+Create a rule in your project:
+* Place the content in `.cursor/rules/instagram-puzzle.mdc` or append it to `.cursorrules`.
 
-```bash
-cp -r .agents/ /path/to/your-project/
-```
+### 2. Claude (Claude Code / Claude Desktop / Projects)
+* **Claude Code:** Add `@.agents/skills/instagram-puzzle-design/SKILL.md` or append to your `CLAUDE.md`.
+* **Claude Projects:** Upload `SKILL.md` directly into your Project Knowledge.
 
-Antigravity will auto-discover the skills and load them on demand.
+### 3. GitHub Copilot
+* Add the skill instructions to `.github/copilot-instructions.md`.
 
-### Option B — Use globally on your machine
+### 4. Windsurf
+* Add the skill to `.windsurfrules` in your workspace root.
 
-Copy the skills folder to your global Antigravity config:
+### 5. Antigravity & Gemini CLI
+* Clone or copy the `.agents/` directory into your project root. Antigravity will discover it automatically:
+  ```bash
+  git clone https://github.com/Hamza-Abu-Jamous/instagram-puzzle-design.git
+  cp -r instagram-puzzle-design/.agents /path/to/your-project/
+  ```
 
-```bash
-# Windows
-xcopy /E /I .agents\skills "%USERPROFILE%\.gemini\config\skills"
-
-# macOS / Linux
-cp -r .agents/skills ~/.gemini/config/skills/
-```
-
-### Option C — Reference via `skills.json`
-
-Add to your project's `.agents/skills.json`:
-
-```json
-{
-  "skills": [
-    {
-      "path": "https://raw.githubusercontent.com/Hamza-Abu-Jamous/instagram-puzzle-design/main/.agents/skills/instagram-puzzle-design/SKILL.md"
-    }
-  ]
-}
-```
+### 6. ChatGPT / Custom GPTs / Any Web LLM
+* Open [`SKILL.md`](.agents/skills/instagram-puzzle-design/SKILL.md), copy the contents, and paste into **Instructions** or **System Prompt**.
 
 ---
 
@@ -73,27 +70,16 @@ Add to your project's `.agents/skills.json`:
 ├── .agents/
 │   └── skills/
 │       └── instagram-puzzle-design/
-│           └── SKILL.md          ← Main skill file
-└── README.md
+│           └── SKILL.md          ← Universal Skill & Instruction file
+└── README.md                     ← Universal Guide & Documentation
 ```
-
----
-
-## 🤝 Contributing
-
-Found a better formula or a new grid size? Open a PR!
-
-1. Fork this repo
-2. Add your skill under `.agents/skills/<skill-name>/SKILL.md`
-3. Update this README
-4. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-MIT — free to use, modify, and share.
+MIT License — Feel free to use, modify, and share in your commercial and personal projects.
 
 ---
 
-> Built with ❤️ by **Programmers IT** · [programmersit.com](https://programmersit.com)
+> Crafted by [Programmers IT](https://programmersit.com) · Engineering reliable AI workflows.
