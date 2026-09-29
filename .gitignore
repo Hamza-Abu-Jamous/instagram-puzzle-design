@@ -25,3 +25,8 @@ desktop.ini
 # Temp / logs
 *.log
 *.tmp
+
+# Private / Workspace folders
+Clients/
+Company Website/
+*.docx

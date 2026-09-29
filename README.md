@@ -58,7 +58,7 @@ Add to your project's `.agents/skills.json`:
 {
   "skills": [
     {
-      "path": "https://raw.githubusercontent.com/YOUR_USERNAME/instagram-puzzle-design/main/.agents/skills/instagram-puzzle-design/SKILL.md"
+      "path": "https://raw.githubusercontent.com/Hamza-Abu-Jamous/instagram-puzzle-design/main/.agents/skills/instagram-puzzle-design/SKILL.md"
     }
   ]
 }

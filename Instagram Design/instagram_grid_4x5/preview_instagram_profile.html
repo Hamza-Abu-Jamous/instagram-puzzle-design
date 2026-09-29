@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>معاينة شبكة انستجرام الاحترافية (Devoteam Formula) - Programmers IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: #0b0f19;
+    color: #f1f5f9;
+    font-family: 'Cairo', system-ui, sans-serif;
+    padding: 30px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container { max-width: 1200px; width: 100%; display: flex; flex-direction: column; gap: 32px; }
+  .header-card {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .header-card h1 { font-size: 28px; font-weight: 900; color: #ffffff; margin-bottom: 8px; }
+  .header-card h1 span { color: #34d399; }
+  .header-card p { font-size: 16px; color: #94a3b8; max-width: 800px; margin: 0 auto; }
+  .controls { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    padding: 10px 24px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    background: #0f172a;
+    color: #cbd5e1;
+    transition: all 0.2s;
+  }
+  .btn:hover, .btn.active {
+    background: #10b981;
+    color: #ffffff;
+    border-color: #10b981;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+  .phone-wrapper { display: flex; justify-content: center; }
+  .phone-frame {
+    width: 440px;
+    background: #000000;
+    border-radius: 44px;
+    border: 3px solid #334155;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+    padding: 16px 0 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px 12px;
+    font-size: 13px;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .phone-profile-header { display: flex; align-items: center; padding: 12px 20px; gap: 16px; }
+  .profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    padding: 3px;
+  }
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #030712;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 20px;
+    color: #34d399;
+  }
+  .profile-stats { flex: 1; display: flex; justify-content: space-around; text-align: center; }
+  .stat-num { font-weight: 800; font-size: 15px; color: #fff; }
+  .stat-label { font-size: 11px; color: #94a3b8; }
+  .profile-bio { padding: 0 20px 14px; font-size: 13px; line-height: 1.5; }
+  .profile-bio b { color: #fff; }
+  .profile-bio span { color: #34d399; }
+  .feed-tabs { display: flex; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; }
+  .feed-tab { flex: 1; text-align: center; padding: 10px 0; font-size: 18px; color: #64748b; }
+  .feed-tab.active { color: #ffffff; border-bottom: 2px solid #ffffff; }
+  .profile-grid-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: #000;
+    margin-top: 2px;
+    direction: ltr;
+  }
+  .grid-cell { position: relative; overflow: hidden; background: #0f172a; }
+  .mode-4-5 .grid-cell { aspect-ratio: 4 / 5; }
+  .mode-1-1 .grid-cell { aspect-ratio: 1 / 1; }
+  .grid-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cell-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(16, 185, 129, 0.6);
+    color: #34d399;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .master-section {
+    background: #0f172a;
+    border-radius: 20px;
+    border: 1px solid #1e293b;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .master-section h2 { font-size: 20px; color: #34d399; display: flex; align-items: center; gap: 8px; }
+  .master-img-container { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #334155; }
+  .master-img-container img { width: 100%; height: auto; display: block; }
+  .posts-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .post-card {
+    background: #0f172a;
+    border-radius: 16px;
+    border: 1px solid #1e293b;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card-thumb { width: 100%; aspect-ratio: 4 / 5; background: #020617; }
+  .post-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .post-card-body { padding: 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .post-order-tag {
+    align-self: flex-start;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+  .post-title { font-size: 16px; font-weight: 800; color: #fff; }
+  .caption-box {
+    background: #020617;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    border: 1px solid #1e293b;
+    max-height: 120px;
+    overflow-y: auto;
+    white-space: pre-line;
+  }
+  .btn-download {
+    display: block;
+    text-align: center;
+    background: #10b981;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: auto;
+    transition: background 0.2s;
+  }
+  .btn-download:hover { background: #059669; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header-card">
+    <h1>Instagram Seamless Puzzle Grid — <span>Programmers IT</span></h1>
+    <p>تم تطبيق معادلة Devoteam العالمية بحذافيرها: نسبة 4:5 بدقة 1080×1350 لكل بوست، مع مناطق أمان Safe Zones تضمن ظهور التصميم متكاملاً تماماً في كِلا الوضعين (البروفايل المربع 1:1 أو العرض الطولي 4:5).</p>
+  </div>
+  <div class="controls">
+    <button class="btn active" onclick="setGridMode('4-5')">عرض البروفايل الطولي الحديث (4:5 Portrait Grid)</button>
+    <button class="btn" onclick="setGridMode('1-1')">عرض البروفايل المربع التقليدي (1:1 Square Crop)</button>
+  </div>
+  <div class="phone-wrapper">
+    <div class="phone-frame">
+      <div class="phone-top-bar">
+        <span>9:41</span>
+        <span>programmersit</span>
+        <span>•••</span>
+      </div>
+      <div class="phone-profile-header">
+        <div class="profile-avatar"><div class="avatar-inner">PIT</div></div>
+        <div class="profile-stats">
+          <div><div class="stat-num">3</div><div class="stat-label">Posts</div></div>
+          <div><div class="stat-num">12.8K</div><div class="stat-label">Followers</div></div>
+          <div><div class="stat-num">184</div><div class="stat-label">Following</div></div>
+        </div>
+      </div>
+      <div class="profile-bio">
+        <b>Programmers IT</b> | Enterprise Cloud & AI<br>
+        نُمكّن المؤسسات من قيادة التحول الرقمي بأعلى معايير الأمان والسلاسة 🇦🇪<br>
+        <span>📍 Dubai, United Arab Emirates</span>
+      </div>
+      <div class="feed-tabs">
+        <div class="feed-tab active">▦</div>
+        <div class="feed-tab">▶</div>
+        <div class="feed-tab">👤</div>
+      </div>
+      <div class="profile-grid-row mode-4-5" id="profileGrid">
+        <div class="grid-cell">
+          <div class="cell-badge">3rd (اليسار)</div>
+          <img src="03_POST_1_Publish_3rd_Left_1080x1350.png" alt="Post 1">
+        </div>
+        <div class="grid-cell">
+          <div class="cell-badge">2nd (الوسط)</div>
+          <img src="02_POST_2_Publish_2nd_Center_1080x1350.png" alt="Post 2">
+        </div>
+        <div class="grid-cell">
+          <div class="cell-badge">1st (اليمين)</div>
+          <img src="01_POST_3_Publish_1st_Right_1080x1350.png" alt="Post 3">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="master-section">
+    <h2>📐 اللوحة البانورامية الكاملة مع خطوط الأمان (3240 × 1350 px)</h2>
+    <p style="font-size: 14px; color: #94a3b8;">
+      الخطوط المتقطعة الصفراء تحدد الـ 135px العلوية والسفلية (منطقة أمان القص المربع 1:1)، والخطوط الحمراء تحدد فواصل القص بين البوستات الثلاثة بدقة صفر بكسل انحراف.
+    </p>
+    <div class="master-img-container">
+      <img src="Master_With_Guides_3240x1350.png" alt="Master With Guides">
+    </div>
+  </div>
+  <div class="posts-detail-grid">
+    <div class="post-card">
+      <div class="post-card-thumb"><img src="01_POST_3_Publish_1st_Right_1080x1350.png" alt="Post 3"></div>
+      <div class="post-card-body">
+        <span class="post-order-tag">الخطوة الأولى: يُنشر أولاً (على اليمين)</span>
+        <div class="post-title">01 — حلول الذكاء الاصطناعي والحوسبة السحابية</div>
+        <div class="caption-box">
+نص المنشور المقترح:
+حلول الذكاء الاصطناعي والحوسبة السحابية المخصصة للمؤسسات الكبرى.
+نبني بنية تحتية سحابية هجينة تضمن أعلى كفاءة تشغيلية واستمرارية لأعمالك بنسبة 99.99%.
+
+AI-driven Enterprise Cloud solutions built for resilience and scalability.
+#ProgrammersIT #CloudSolutions #EnterpriseAI #DubaiTech #UAE
+        </div>
+        <a href="01_POST_3_Publish_1st_Right_1080x1350.png" download class="btn-download">تحميل البوست الأول (1080×1350)</a>
+      </div>
+    </div>
+    <div class="post-card">
+      <div class="post-card-thumb"><img src="02_POST_2_Publish_2nd_Center_1080x1350.png" alt="Post 2"></div>
+      <div class="post-card-body">
+        <span class="post-order-tag">الخطوة الثانية: يُنشر ثانياً (في المنتصف)</span>
+        <div class="post-title">02 — الابتكار الهندسي المؤسسي (Burj Khalifa Hero)</div>
+        <div class="caption-box">
+نص المنشور المقترح:
+الابتكار ليس مجرد فكرة، بل هندسة دقيقة تُعيد صياغة المستقبل.
+من قلب دبي، نصنع فارقاً تكنولوجياً حقيقياً لأكبر الكيانات والمؤسسات.
+
+Innovation Redefined. Engineering sovereign enterprise technology from Dubai to the world.
+#BurjKhalifa #TechLeadership #DigitalTransformation #ProgrammersIT
+        </div>
+        <a href="02_POST_2_Publish_2nd_Center_1080x1350.png" download class="btn-download">تحميل البوست الثاني (1080×1350)</a>
+      </div>
+    </div>
+    <div class="post-card">
+      <div class="post-card-thumb"><img src="03_POST_1_Publish_3rd_Left_1080x1350.png" alt="Post 1"></div>
+      <div class="post-card-body">
+        <span class="post-order-tag">الخطوة الثالثة: يُنشر ثالثاً (على اليسار)</span>
+        <div class="post-title">03 — نقود التحول الرقمي ونصنع المستقبل</div>
+        <div class="caption-box">
+نص المنشور المقترح:
+شريكك التكنولوجي المعتمد في دولة الإمارات والشرق الأوسط.
+نجمع بين الاستشارات التقنية المعمقة والتنفيذ البرمجي فائق الجودة، لتمكين كبرى المؤسسات من تحقيق قفزات نوعية في كفاءة أعمالها.
+
+Empowering Enterprise Digital Transformation.
+#TechFirm #DigitalConsultancy #SoftwareDevelopment #UAE #ProgrammersIT
+        </div>
+        <a href="03_POST_1_Publish_3rd_Left_1080x1350.png" download class="btn-download">تحميل البوست الثالث (1080×1350)</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function setGridMode(mode) {
+  const grid = document.getElementById('profileGrid');
+  const btns = document.querySelectorAll('.controls .btn');
+  btns.forEach(b => b.classList.remove('active'));
+  if (mode === '4-5') {
+    grid.className = 'profile-grid-row mode-4-5';
+    btns[0].classList.add('active');
+  } else {
+    grid.className = 'profile-grid-row mode-1-1';
+    btns[1].classList.add('active');
+  }
+}
+</script>
+</body>
+</html>

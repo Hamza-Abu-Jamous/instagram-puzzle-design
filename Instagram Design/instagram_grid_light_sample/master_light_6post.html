@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Programmers IT - Modern Light 6-Post Puzzle Sample</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    width: 3240px;
+    height: 2700px;
+    overflow: hidden;
+    background-color: #f8fafc;
+    font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+    color: #0f172a;
+    direction: rtl;
+  }
+
+  .canvas {
+    width: 3240px;
+    height: 2700px;
+    position: relative;
+    overflow: hidden;
+    background: #f8fafc;
+  }
+
+  /* Architectural Daylight Panorama with High-Key Light Grading */
+  .bg-architecture {
+    position: absolute;
+    inset: 0;
+    width: 3240px;
+    height: 2700px;
+    background-image: url('file:///c:/Users/hamzaj/Desktop/Programmers IT/instagram_posts/dubai_panorama_3400.jpg');
+    background-size: cover;
+    background-position: center top;
+    filter: brightness(1.25) contrast(0.95) saturate(0.85);
+    opacity: 0.38; /* Soft, luminous architectural background */
+  }
+
+  /* Modern Light Studio Overlays: Clean White Gradients */
+  .light-grade {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(248, 250, 252, 0.95) 75%),
+      linear-gradient(180deg, #ffffff 0%, rgba(248, 250, 252, 0.4) 40%, #ffffff 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.85) 0%, transparent 20%, transparent 80%, rgba(255, 255, 255, 0.85) 100%);
+    pointer-events: none;
+  }
+
+  /* Modern Clean Geometric Matrix Mesh */
+  .tech-mesh {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(#cbd5e1 1.2px, transparent 1.2px), 
+      linear-gradient(to right, rgba(226, 232, 240, 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(226, 232, 240, 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Continuous Fluid Emerald-Cyan Ribbon across all 6 posts */
+  .seamless-svg {
+    position: absolute;
+    inset: 0;
+    width: 3240px;
+    height: 2700px;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Post Grid Cells - 1080 x 1350 each */
+  .post-cell {
+    position: absolute;
+    width: 1080px;
+    height: 1350px;
+    z-index: 10;
+  }
+
+  /* Row 1 (Top Row: y = 0 to 1350) */
+  .p-r1-left   { top: 0px; left: 0px; }       /* Post 6 (Top-Left) */
+  .p-r1-center { top: 0px; left: 1080px; }    /* Post 5 (Top-Center) */
+  .p-r1-right  { top: 0px; left: 2160px; }    /* Post 4 (Top-Right) */
+
+  /* Row 2 (Bottom Row: y = 1350 to 2700) */
+  .p-r2-left   { top: 1350px; left: 0px; }    /* Post 3 (Bottom-Left) */
+  .p-r2-center { top: 1350px; left: 1080px; } /* Post 2 (Bottom-Center) */
+  .p-r2-right  { top: 1350px; left: 2160px; } /* Post 1 (Bottom-Right) */
+
+  /* ========================================================================= */
+  /* ULTRA-CLEAN MODERN LIGHT CARDS                                           */
+  /* ========================================================================= */
+  .clean-card {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    border-radius: 28px;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    padding: 38px 42px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  /* Vibrant Accent Top Bar */
+  .clean-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #10b981, #059669, #06b6d4);
+  }
+
+  .card-num-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #047857;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin-bottom: 16px;
+  }
+
+  .card-title-ar {
+    font-size: 34px;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .card-title-ar span {
+    color: #059669;
+  }
+
+  .card-title-en {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #64748b;
+    direction: ltr;
+    text-align: right;
+    margin-bottom: 16px;
+    letter-spacing: 0.2px;
+  }
+
+  .card-desc {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #334155;
+    font-weight: 500;
+    margin-bottom: 22px;
+  }
+
+  .card-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .feat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+  .feat-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #059669;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 8px;
+    direction: ltr;
+    padding-top: 14px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .card-tag {
+    padding: 4px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  /* Header Branding Elements */
+  .brand-header-light {
+    position: absolute;
+    top: 180px;
+    left: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    direction: ltr;
+  }
+  .brand-logo-text {
+    font-size: 38px;
+    font-weight: 900;
+    color: #0f172a;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+  }
+  .glowing-o {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #6ee7b7 0%, #10b981 60%);
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.6);
+    margin: 0 2px;
+    border: 2px solid #0f172a;
+  }
+  .brand-it { color: #059669; margin-left: 2px; }
+
+  .brand-badge-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #047857;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+
+  /* Pill Badges in Centers */
+  .center-pill-light {
+    position: absolute;
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: #ffffff;
+    border: 1.5px solid #10b981;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #047857;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
+    white-space: nowrap;
+    direction: ltr;
+  }
+
+  /* Category Banner */
+  .category-banner {
+    position: absolute;
+    top: 180px;
+    right: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .cat-pill {
+    padding: 6px 18px;
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #047857;
+  }
+  .cat-title {
+    font-size: 38px;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1.2;
+  }
+</style>
+</head>
+<body>
+
+<div class="canvas">
+  <div class="bg-architecture"></div>
+  <div class="light-grade"></div>
+  <div class="tech-mesh"></div>
+
+  <!-- Continuous Luminous Emerald & Cyan Fluid Ribbon connecting all 6 posts -->
+  <svg class="seamless-svg" viewBox="0 0 3240 2700" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#10b981" stop-opacity="0.8" />
+        <stop offset="25%" stop-color="#059669" stop-opacity="0.9" />
+        <stop offset="50%" stop-color="#06b6d4" stop-opacity="0.9" />
+        <stop offset="75%" stop-color="#10b981" stop-opacity="0.85" />
+        <stop offset="100%" stop-color="#34d399" stop-opacity="0.8" />
+      </linearGradient>
+
+      <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="12" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- Broad Ambient Path -->
+    <path d="M 2850 2400 C 2300 2450, 1900 2150, 1620 2150 C 1300 2150, 800 2450, 350 2300 C 100 2200, 150 1500, 250 1100 C 350 700, 1200 450, 1620 450 C 2100 450, 2900 650, 3050 1000"
+          stroke="url(#ribbonGrad)" stroke-width="42" fill="none" opacity="0.25" filter="url(#softGlow)" />
+
+    <!-- Sharp Laser Ribbon Core -->
+    <path d="M 2850 2400 C 2300 2450, 1900 2150, 1620 2150 C 1300 2150, 800 2450, 350 2300 C 100 2200, 150 1500, 250 1100 C 350 700, 1200 450, 1620 450 C 2100 450, 2900 650, 3050 1000"
+          stroke="url(#ribbonGrad)" stroke-width="6" fill="none" filter="url(#softGlow)" />
+
+    <!-- Trajectory Dashed Flow -->
+    <path d="M 2850 2415 C 2300 2465, 1900 2165, 1620 2165 C 1300 2165, 800 2465, 350 2315 C 100 2215, 150 1515, 250 1115 C 350 715, 1200 465, 1620 465 C 2100 465, 2900 665, 3050 1015"
+          stroke="#059669" stroke-width="2" stroke-dasharray="10 12" fill="none" opacity="0.4" />
+
+    <!-- Connecting Celestial Pulse Nodes (One inside each post) -->
+    <circle cx="2850" cy="2400" r="10" fill="#10b981" filter="url(#softGlow)" />
+    <circle cx="2850" cy="2400" r="4" fill="#ffffff" />
+
+    <circle cx="1620" cy="2150" r="10" fill="#06b6d4" filter="url(#softGlow)" />
+    <circle cx="1620" cy="2150" r="4" fill="#ffffff" />
+
+    <circle cx="350" cy="2300" r="10" fill="#10b981" filter="url(#softGlow)" />
+    <circle cx="350" cy="2300" r="4" fill="#ffffff" />
+
+    <circle cx="250" cy="1100" r="10" fill="#059669" filter="url(#softGlow)" />
+    <circle cx="250" cy="1100" r="4" fill="#ffffff" />
+
+    <circle cx="1620" cy="450" r="12" fill="#06b6d4" filter="url(#softGlow)" />
+    <circle cx="1620" cy="450" r="5" fill="#ffffff" />
+
+    <circle cx="3050" cy="1000" r="10" fill="#10b981" filter="url(#softGlow)" />
+    <circle cx="3050" cy="1000" r="4" fill="#ffffff" />
+  </svg>
+
+  <!-- ========================================================================= -->
+  <!-- TOP ROW (Row 1: y = 0 to 1350)                                           -->
+  <!-- ========================================================================= -->
+
+  <!-- POST 6 (Top-Left): STRATEGIC TECH ADVISORY -->
+  <div class="post-cell p-r1-left">
+    <div class="brand-header-light">
+      <div class="brand-logo-text">Pr<span class="glowing-o"></span>grammers<span class="brand-it">IT</span></div>
+      <div class="brand-badge-light">UAE • ENTERPRISE CONSULTING</div>
+    </div>
+
+    <div class="clean-card" style="position: absolute; bottom: 180px; left: 100px; width: 880px;">
+      <div class="card-num-badge">SERVICE 06 • الاستشارات والتمثيل</div>
+      <div class="card-title-ar">الاستشارات الاستراتيجية <span>والتمثيل التقني</span></div>
+      <div class="card-title-en">Strategic Tech Advisory & Fractional CTO</div>
+      <div class="card-desc">
+        قيادة التحول الرقمي لمؤسستك، وتوفير التمثيل الفني والاستشاري المعتمد أمام المستثمرين والجهات الحكومية والشركاء كذراع تقني استراتيجي موثوق.
+      </div>
+      <div class="card-features">
+        <div class="feat-item"><div class="feat-check">✓</div><span>صياغة وتدقيق كراسات الشروط التقنية (RFP & Architecture)</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>تمثيل رسمي ومفاوضات تقنية متقدمة مع الموردين والجهات</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>حوكمة الأمن السيبراني والامتثال للمعايير المؤسسية</span></div>
+      </div>
+      <div class="card-tags">
+        <span class="card-tag">Tech Advisory</span>
+        <span class="card-tag">Fractional CTO</span>
+        <span class="card-tag">RFP Governance</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST 5 (Top-Center): APPLIED AI & AUTOMATION -->
+  <div class="post-cell p-r1-center">
+    <div class="center-pill-light">
+      <span style="color: #10b981;">●</span> APPLIED ENTERPRISE AI • الابتكار المؤسسي
+    </div>
+
+    <div class="clean-card" style="position: absolute; bottom: 180px; left: 100px; width: 880px;">
+      <div class="card-num-badge">SERVICE 05 • الذكاء الاصطناعي</div>
+      <div class="card-title-ar">حلول الذكاء الاصطناعي <span>والأتمتة الذكية</span></div>
+      <div class="card-title-en">Applied AI & Autonomous Agents</div>
+      <div class="card-desc">
+        دمج نماذج الذكاء الاصطناعي المتطورة (LLMs) وأتمتة العمليات التشغيلية الذكية لرفع كفاءة أعمالك وخفض التكاليف بنسب تتجاوز 60%.
+      </div>
+      <div class="card-features">
+        <div class="feat-item"><div class="feat-check">✓</div><span>روبوتات محادثة ذكية متخصصة مدربة على بيانات شركتك الخاصة</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>أتمتة المهام المتكررة وتدفقات العمل (Autonomous Workflows)</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>تحليلات تنبؤية متقدمة تدعم اتخاذ القرارات التنفيذية فورياً</span></div>
+      </div>
+      <div class="card-tags">
+        <span class="card-tag">LLM Integration</span>
+        <span class="card-tag">Smart Agents</span>
+        <span class="card-tag">Workflow AI</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST 4 (Top-Right): BESPOKE SYSTEMS & ERP -->
+  <div class="post-cell p-r1-right">
+    <div class="category-banner">
+      <div class="cat-pill">منظومة الحلول الرقمية 🇦🇪</div>
+      <div class="cat-title">حلول مؤسسية متقدمة</div>
+    </div>
+
+    <div class="clean-card" style="position: absolute; bottom: 180px; right: 100px; width: 880px;">
+      <div class="card-num-badge">SERVICE 04 • الأنظمة المخصصة</div>
+      <div class="card-title-ar">هندسة الأنظمة البرمجية <span>الخاصة (ERP)</span></div>
+      <div class="card-title-en">Bespoke Enterprise Systems & SaaS</div>
+      <div class="card-desc">
+        بناء وتفصيل أنظمة إدارة العمليات المعقدة المصممة خصيصاً وفق متطلبات أعمالك الفريدة لأتمتة سير العمل الداخلي بين كافة الأقسام.
+      </div>
+      <div class="card-features">
+        <div class="feat-item"><div class="feat-check">✓</div><span>أنظمة ERP و CRM مفصلة بالكامل بدون قيود البرمجيات الجاهزة</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>لوحات تحكم تفاعلية وتقارير أداء لحظية فائقة الدقة</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>ربط سلس عبر واجهات البرمجة (APIs) مع الأنظمة الحكومية والمالية</span></div>
+      </div>
+      <div class="card-tags">
+        <span class="card-tag">Custom ERP</span>
+        <span class="card-tag">SaaS Architecture</span>
+        <span class="card-tag">Enterprise APIs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- BOTTOM ROW (Row 2: y = 1350 to 2700)                                     -->
+  <!-- ========================================================================= -->
+
+  <!-- POST 3 (Bottom-Left): ENTERPRISE MOBILE APPS -->
+  <div class="post-cell p-r2-left">
+    <div class="clean-card" style="position: absolute; top: 180px; left: 100px; width: 880px;">
+      <div class="card-num-badge">SERVICE 03 • تطبيقات الهواتف</div>
+      <div class="card-title-ar">تطوير تطبيقات <span>الهواتف الذكية</span></div>
+      <div class="card-title-en">Enterprise Mobile Apps (iOS & Android)</div>
+      <div class="card-desc">
+        هندسة وتصميم تطبيقات أصلية وهجينة بمعايير عالمية تجمع بين تجربة المستخدم الاستثنائية (UI/UX) وسرعة الاستجابة الفائقة.
+      </div>
+      <div class="card-features">
+        <div class="feat-item"><div class="feat-check">✓</div><span>برمجة أصلية وهجينة بأحدث التقنيات (Flutter / Swift / Kotlin)</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>واجهات استخدام ساحرة تعزز تحويل المستخدمين لعملاء دائمين</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>أمان مصرفي متقدم وتشفير كامل للمدفوعات والبيانات</span></div>
+      </div>
+      <div class="card-tags">
+        <span class="card-tag">iOS & Android</span>
+        <span class="card-tag">Flutter / Swift</span>
+        <span class="card-tag">High Performance</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST 2 (Bottom-Center): PERFORMANCE MARKETING & GROWTH -->
+  <div class="post-cell p-r2-center">
+    <div class="clean-card" style="position: absolute; top: 180px; left: 100px; width: 880px;">
+      <div class="card-num-badge">SERVICE 02 • النمو الإعلاني</div>
+      <div class="card-title-ar">إدارة الحملات <span>والنمو الرقمي الموجه</span></div>
+      <div class="card-title-en">Performance Marketing & Paid Growth</div>
+      <div class="card-desc">
+        إدارة وتشغيل الحملات الإعلانية على Meta و TikTok بحلول هندسية لحل المشكلات والقيود الإعلانية، مع ربط أتمتة واتساب الأعمال الذكي.
+      </div>
+      <div class="card-features">
+        <div class="feat-item"><div class="feat-check">✓</div><span>إطلاق وتوسيع حملات Meta و TikTok بأعلى عائد إنفاق (ROAS)</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>معالجة وحل مشكلات الحظر والقيود على الحسابات الإعلانية</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>أتمتة محادثات WhatsApp Business لتحويل الاستفسارات لمبيعات</span></div>
+      </div>
+      <div class="card-tags">
+        <span class="card-tag">Meta Ads</span>
+        <span class="card-tag">TikTok Growth</span>
+        <span class="card-tag">WhatsApp API</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST 1 (Bottom-Right): AI-POWERED WEB PLATFORMS -->
+  <div class="post-cell p-r2-right">
+    <div class="clean-card" style="position: absolute; top: 180px; right: 100px; width: 880px;">
+      <div class="card-num-badge">SERVICE 01 • المواقع والمنصات الذكية</div>
+      <div class="card-title-ar">المنصات الرقمية <span>والمواقع الذكية</span></div>
+      <div class="card-title-en">Smart AI-Powered Web Platforms</div>
+      <div class="card-desc">
+        تطوير منصات ويب تفاعلية فائقة السرعة مزودة بمساعد ذكي مدمج (AI Concierge) يجيب على استفسارات الزوار ويقود عمليات البيع والدعم على مدار الساعة.
+      </div>
+      <div class="card-features">
+        <div class="feat-item"><div class="feat-check">✓</div><span>مساعد ذكي مدمج في صلب الموقع لخدمة العملاء والبيع الآلي</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>سرعة تحميل خارقة وتوافق 100% مع معايير محركات البحث (SEO)</span></div>
+        <div class="feat-item"><div class="feat-check">✓</div><span>بوابات دفع إلكترونية آمنة وتكامل كامل مع برمجياتك</span></div>
+      </div>
+      <div class="card-tags">
+        <span class="card-tag">AI Concierge</span>
+        <span class="card-tag">Next.js / React</span>
+        <span class="card-tag">Instant Sales</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
